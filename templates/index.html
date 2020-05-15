@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <table>
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>TOTAL</th>
+        </tr>
+        {% for row in rows %}
+            <tr>
+                <td>{{ row["symbol"] }}</td>
+                <td>{{ row["stock"] }}</td>
+                <td>{{ row["shares"] }}</td>
+                <td>{{ usdFunction(myFunction(row["symbol"])["price"]) }}</td>
+                <td>{{ usdFunction(row["shares"]*myFunction(row["symbol"])["price"]) }}</td>
+            </tr>
+        {% endfor%}
+        <tr>
+            <td>CASH</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ usdFunction(cash) }}</td>
+        </tr>
+        <tr style="font-weight: bold; background-color: white;">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ usdFunction(cash+stockCASH) }}</td>
+        </tr>
+    </table>
+{% endblock %}
